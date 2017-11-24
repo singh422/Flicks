@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E1468BDD1FC818EE00EAF8F9 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1468BDC1FC818EE00EAF8F9 /* DetailViewController.swift */; };
+		E1468BDF1FC82B0C00EAF8F9 /* PosterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1468BDE1FC82B0C00EAF8F9 /* PosterCell.swift */; };
+		E1468BE11FC82B4200EAF8F9 /* SuperheroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1468BE01FC82B4200EAF8F9 /* SuperheroViewController.swift */; };
 		E172D64E1FBF9CFB0029B044 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E172D64D1FBF9CFB0029B044 /* AppDelegate.swift */; };
 		E172D6531FBF9CFB0029B044 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E172D6511FBF9CFB0029B044 /* Main.storyboard */; };
 		E172D6551FBF9CFB0029B044 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E172D6541FBF9CFB0029B044 /* Assets.xcassets */; };
@@ -19,6 +22,9 @@
 /* Begin PBXFileReference section */
 		79C6AF335A886C6980EA2ECB /* Pods-Flix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flix.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Flix/Pods-Flix.debug.xcconfig"; sourceTree = "<group>"; };
 		9CB83EA968F18BB7F66F34F8 /* Pods-Flix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flix.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flix/Pods-Flix.release.xcconfig"; sourceTree = "<group>"; };
+		E1468BDC1FC818EE00EAF8F9 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		E1468BDE1FC82B0C00EAF8F9 /* PosterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterCell.swift; sourceTree = "<group>"; };
+		E1468BE01FC82B4200EAF8F9 /* SuperheroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperheroViewController.swift; sourceTree = "<group>"; };
 		E172D64A1FBF9CFB0029B044 /* Flix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E172D64D1FBF9CFB0029B044 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E172D6521FBF9CFB0029B044 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -59,6 +65,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		E1468BDB1FC818AE00EAF8F9 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E172D65F1FBFE2750029B044 /* NowPlayingViewController.swift */,
+				E1468BE01FC82B4200EAF8F9 /* SuperheroViewController.swift */,
+				E1468BDC1FC818EE00EAF8F9 /* DetailViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		E172D6411FBF9CFB0029B044 = {
 			isa = PBXGroup;
 			children = (
@@ -81,8 +97,9 @@
 			isa = PBXGroup;
 			children = (
 				E172D64D1FBF9CFB0029B044 /* AppDelegate.swift */,
-				E172D65F1FBFE2750029B044 /* NowPlayingViewController.swift */,
+				E1468BDB1FC818AE00EAF8F9 /* ViewControllers */,
 				E172D6611FBFEDC50029B044 /* MovieCell.swift */,
+				E1468BDE1FC82B0C00EAF8F9 /* PosterCell.swift */,
 				E172D6511FBF9CFB0029B044 /* Main.storyboard */,
 				E172D6541FBF9CFB0029B044 /* Assets.xcassets */,
 				E172D6561FBF9CFB0029B044 /* LaunchScreen.storyboard */,
@@ -215,8 +232,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E172D6601FBFE2750029B044 /* NowPlayingViewController.swift in Sources */,
+				E1468BDF1FC82B0C00EAF8F9 /* PosterCell.swift in Sources */,
+				E1468BE11FC82B4200EAF8F9 /* SuperheroViewController.swift in Sources */,
 				E172D64E1FBF9CFB0029B044 /* AppDelegate.swift in Sources */,
 				E172D6621FBFEDC50029B044 /* MovieCell.swift in Sources */,
+				E1468BDD1FC818EE00EAF8F9 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
