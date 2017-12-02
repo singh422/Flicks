@@ -20,8 +20,8 @@ class NowPlayingViewController: UIViewController, UITableViewDelegate,UITableVie
         
         tableView.delegate = self
         tableView.dataSource = self
-        
-        tableView.rowHeight = 185
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 120
         
         networkRequest()
         self.refreshControl = UIRefreshControl()
