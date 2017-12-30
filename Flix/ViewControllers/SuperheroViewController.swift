@@ -10,7 +10,8 @@ import UIKit
 
 class SuperheroViewController: UIViewController, UICollectionViewDataSource {
     
-    var movies: [[String: Any]] = []
+//    var movies: [[String: Any]] = []
+    var movies: [Movie] = []
     @IBOutlet weak var collectionView: UICollectionView!
     
     
@@ -49,11 +50,21 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource {
                 print(error.localizedDescription)
             } else if let data = data {
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-                let movies = dataDictionary["results"] as! [[String: Any]]
-                self.movies = movies
-                for movie in movies{
-                    let title = movie["title"] as! String
+                let movieDictionaries = dataDictionary["results"] as! [[String: Any]]
+                
+                self.movies = []
+                for dictionary in movieDictionaries {
+                    let movie = Movie(dictionary: dictionary)
+                    self.movies.append(movie)
                 }
+                
+                
+//                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+//                let movies = dataDictionary["results"] as! [[String: Any]]
+//                self.movies = movies
+//                for movie in movies{
+//                    let title = movie["title"] as! String
+//                }
                 // TODO: Get the array of movies
                 // TODO: Store the movies in a property to use elsewhere
                 // TODO: Reload your table view data
@@ -76,11 +87,16 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath)-> UICollectionViewCell{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "posterCell", for: indexPath) as! PosterCell
         let movie = movies[indexPath.item]
-        if let posterPathString = movie["poster_path"] as? String{
-            let baseUrlString = "https://image.tmdb.org/t/p/w500"
-            let posterUrl = URL (string: baseUrlString + posterPathString)!
-            cell.posterImageView.af_setImage(withURL: posterUrl)
+        
+        if let posterUrl = movie.posterUrl {
+           cell.posterImageView.af_setImage(withURL: posterUrl)
         }
+        
+//        if let posterPathString = movie.posterUrl as? String{
+//            let baseUrlString = "https://image.tmdb.org/t/p/w500"
+//            let posterUrl = URL (string: baseUrlString + posterPathString)!
+//            cell.posterImageView.af_setImage(withURL: posterUrl)
+//        }
         
         return cell
         

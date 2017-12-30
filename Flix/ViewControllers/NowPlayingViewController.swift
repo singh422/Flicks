@@ -14,7 +14,10 @@ class NowPlayingViewController: UIViewController, UITableViewDelegate,UITableVie
     @IBOutlet weak var tableView: UITableView!
     var refreshControl : UIRefreshControl!
     @IBOutlet weak var activityControl: UIActivityIndicatorView!
-    var movies :[[String: Any]] = []
+//    var movies :[[String: Any]] = []
+
+    var movies: [Movie] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,7 +26,7 @@ class NowPlayingViewController: UIViewController, UITableViewDelegate,UITableVie
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
         
-        networkRequest()
+        networkReq()
         self.refreshControl = UIRefreshControl()
         self.refreshControl.addTarget(self, action: #selector (NowPlayingViewController.didPullToRefresh(_:)), for: .valueChanged)
         tableView.insertSubview(refreshControl, at: 0)
@@ -32,35 +35,56 @@ class NowPlayingViewController: UIViewController, UITableViewDelegate,UITableVie
         // Do any additional setup after loading the view.
     }
     @objc func didPullToRefresh(_ refreshControl : UIRefreshControl){
-        networkRequest()
+        networkReq()
         
     }
     
-    func networkRequest(){
+//    func networkRequest(){
+//        activityControl.startAnimating()
+//        let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
+//        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
+//        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
+//        let task = session.dataTask(with: request) { (data, response, error) in
+//            // This will run when the network request returns
+//            if let error = error {
+//                print(error.localizedDescription)
+//            } else if let data = data {
+//                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+//                let movieDictionaries = dataDictionary["results"] as! [[String: Any]]
+//
+//                self.movies = []
+//                for dictionary in movieDictionaries {
+//                    let movie = Movie(dictionary: dictionary)
+//                    self.movies.append(movie)
+//                }
+//
+////                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+////                let movies = dataDictionary["results"] as! [[String: Any]]
+////                self.movies = movies
+////                for movie in movies{
+////                    let title = movie["title"] as! String
+////                }
+//                // TODO: Get the array of movies
+//                // TODO: Store the movies in a property to use elsewhere
+//                // TODO: Reload your table view data
+//                self.activityControl.stopAnimating()
+//                self.tableView.reloadData()
+//                self.refreshControl.endRefreshing()
+//            }
+//        }
+//        task.resume()
+//    }
+    
+    func networkReq(){
         activityControl.startAnimating()
-        let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
-        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
-        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
-        let task = session.dataTask(with: request) { (data, response, error) in
-            // This will run when the network request returns
-            if let error = error {
-                print(error.localizedDescription)
-            } else if let data = data {
-                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-                let movies = dataDictionary["results"] as! [[String: Any]]
-                self.movies = movies
-                for movie in movies{
-                    let title = movie["title"] as! String
-                }
-                // TODO: Get the array of movies
-                // TODO: Store the movies in a property to use elsewhere
-                // TODO: Reload your table view data
-                self.activityControl.stopAnimating()
-                self.tableView.reloadData()
-                self.refreshControl.endRefreshing()
-            }
+        MovieApiManager().nowPlayingMovies { (movies: [Movie]?, error: Error?) in
+        if let movies = movies {
+        self.movies = movies
+        self.activityControl.stopAnimating()
+        self.tableView.reloadData()
+        self.refreshControl.endRefreshing()
         }
-        task.resume()
+    }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -72,17 +96,7 @@ class NowPlayingViewController: UIViewController, UITableViewDelegate,UITableVie
         
         let movie = movies[indexPath.row]
         
-        let title = movie["title"] as! String
-        let overview = movie["overview"] as! String
-        let posterPathString = movie["poster_path"] as! String
-        let baseUrlString = "https://image.tmdb.org/t/p/w500"
-        let posterUrl = URL (string: baseUrlString + posterPathString)!
-        
-        cell.posterView.af_setImage(withURL: posterUrl)
-        cell.titleLabel.text = title
-        cell.descriptionLabel.text = overview
-        
-        
+        cell.movie = movie
         
         return cell
     }
