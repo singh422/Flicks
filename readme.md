@@ -1,5 +1,5 @@
 
-*Flix*
+**Flix**
 
 **Flix** is a movies app using the [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
@@ -13,9 +13,6 @@ Here's a walkthrough of implemented user stories:
 
 
 <img src='https://i.imgur.com/H9MUNUL.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-
-
-<img src='https://i.imgur.com/6cHN0xe.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 
 <img src='https://i.imgur.com/6cHN0xe.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
